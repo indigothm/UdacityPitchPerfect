@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 class RecordedAudio: NSObject{
     var filePathUrl: NSURL!
@@ -15,5 +16,11 @@ class RecordedAudio: NSObject{
     init (title: String, filePath: NSURL) {
         self.filePathUrl = filePath
         self.title = title
+    }
+    
+   static func recordingWillStop () {
+        var audioSession = AVAudioSession.sharedInstance()
+        audioSession.setActive(false, error: nil)
+        //this is written in optimized code branch
     }
 }
