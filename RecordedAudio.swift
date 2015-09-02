@@ -21,7 +21,5 @@ class RecordedAudio: NSObject{
    static func recordingWillStop () {
         var audioSession = AVAudioSession.sharedInstance()
         audioSession.setActive(false, error: nil)
-        //this is written in optimized code branch
-        //test
     }
 }

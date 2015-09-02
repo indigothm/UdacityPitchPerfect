@@ -30,11 +30,6 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.hidden = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBOutlet weak var recordingLabel: UILabel!
 
     
@@ -60,8 +55,11 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.record()
     }
     
+    
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
+        
         if flag {
+        
         recordedAudio = RecordedAudio(title: recorder.url.lastPathComponent!, filePath: recorder.url)
         
         self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
@@ -73,6 +71,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         recordingLabel.enabled = true
         }
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "stopRecording") {
