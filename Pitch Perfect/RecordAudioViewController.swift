@@ -21,12 +21,13 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        recordingLabel.text = "tap to record"
         stopButton.hidden = true
         
     }
     
     override func viewWillAppear(animated: Bool) {
+        recordingLabel.text = "tap to record"
+        super.viewWillAppear(true)
         stopButton.hidden = true
     }
 
@@ -59,16 +60,12 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         
         if flag {
-        
-        recordedAudio = RecordedAudio(title: recorder.url.lastPathComponent!, filePath: recorder.url)
-        
-        self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
-            
-        } else
-        {
-        println("error")
-        recordingButton.enabled = true
-        recordingLabel.enabled = true
+            recordedAudio = RecordedAudio(title: recorder.url.lastPathComponent!, filePath: recorder.url)
+            self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
+        } else{
+            println("error")
+            recordingButton.enabled = true
+            recordingLabel.enabled = true
         }
     }
     
@@ -83,8 +80,9 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         
     }
 
+    
+    
     @IBAction func stopButtonDidTouch(sender: UIButton) {
-        recordingLabel.text = "tap to record"
         audioRecorder.stop()
         RecordedAudio.recordingWillStop()
 

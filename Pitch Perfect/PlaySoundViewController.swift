@@ -19,53 +19,43 @@ class PlaySoundViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        self.avPlayer = AVAudioPlayer(contentsOfURL: recievedAudio.filePathUrl, error: nil)
-        self.avPlayer.enableRate = true
+        avPlayer = AVAudioPlayer(contentsOfURL: recievedAudio.filePathUrl, error: nil)
+        avPlayer.enableRate = true
         
         audioEngine = AVAudioEngine()
         audioFile = AVAudioFile(forReading: recievedAudio.filePathUrl, error: nil)
         
-        
-
-        
     }
     
     func stopEngine() {
-        self.audioEngine.stop()
-        self.audioEngine.reset()
+        
+        audioEngine.stop()
+        audioEngine.reset()
     }
     
     func playWithRate(rate: Float) {
         
-        self.avPlayer.rate = rate
-        
-        self.avPlayer.play()
+        avPlayer.rate = rate
+        avPlayer.play()
         
     }
     
     @IBAction func stopPlayButton(sender: AnyObject) {
-        self.stopEngine()
-        self.avPlayer.stop()
+        stopEngine()
+        avPlayer.stop()
     }
 
     @IBAction func slowSoundPlay(sender: UIButton) {
         
-        
-        self.stopEngine()
-        
+        stopEngine()
         playWithRate(0.4)
-        
         
     }
     
     @IBAction func fastSoundPlay(sender: UIButton) {
         
         self.stopEngine()
-        
         playWithRate(2.0)
-        
-        
         
     }
     
@@ -91,16 +81,12 @@ class PlaySoundViewController: UIViewController {
         audioEngine.startAndReturnError(nil)
         audioPlayerNode.play()
         
-        
     }
     
     @IBAction func playChimpmunkSound(sender: UIButton) {
         
        playAudioWithVariablePitch(1000)
         
-        
     }
     
-   
-
 }
